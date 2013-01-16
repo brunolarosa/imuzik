@@ -14,6 +14,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.apache.commons.io.FileUtils;
+import org.farng.mp3.MP3File;
 import utils.ID3Util;
 
 /**
@@ -24,12 +25,16 @@ import utils.ID3Util;
 @Startup
 @LocalBean
 public class InitializedManager {
-
+    
     @PersistenceContext(unitName = "iMuzik-ejbPU")
     private EntityManager em;
 
+    
+    
+    
     @PostConstruct
     public void init() {
+
 
         File root = new File("/Users/brunolarosa/Desktop/MusicTest/");
         String[] extensions = {"mp3"};
@@ -37,9 +42,38 @@ public class InitializedManager {
 
 
         for (File file : files) {
-            Song song = ID3Util.readFile(file);
-            em.persist(song);
+
+            String nameFile = file.getName();
+            String absolutePath = file.getAbsolutePath();
+
+            try {
+                if (nameFile.endsWith("mp3")) {
+
+                    MP3File mp3File;
+                    try {
+                        mp3File = new MP3File(file);
+                    } catch (javax.faces.view.facelets.TagException e) {
+                        mp3File = null;
+                    }
+
+                    if (null != mp3File) {
+
+                        Song song = new Song(absolutePath);
+
+                        ID3Util.readID3Tag(mp3File, song);
+
+                        persist(song);
+
+
+                    }
+
+                }
+            } catch (Exception e) {
+            }
+
         }
+
+
 
     }
 
