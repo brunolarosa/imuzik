@@ -1,0 +1,140 @@
+/* 
+    Document   : main
+    Created on : 15 janv. 2013, 16:23:07
+    Author     : brunolarosa
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+@import url('reset.css');
+
+@font-face {
+    font-family: Cantarell;
+    src: url("../fonts/Cantarell-Regular.ttf");
+}
+
+@font-face {
+    font-family: Cantarell;
+    font-weight: bold;
+    src: url("../fonts/Cantarell-Bold.ttf");
+}
+
+body {
+    color: #666;
+    display: block;
+    font-family: Cantarell, sans-serif;
+}
+
+a {
+    color: #008dde;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#wrappper {
+
+}
+
+#sidebar {
+    z-index: 2;
+    width: 136px;
+    left: 15px;
+    top: 15px;
+    position: fixed;
+}
+
+#sidebar > #header, #sidebar > div, #sidebar > #sidebar_nav {
+    background-color: #313131;
+    box-shadow: 0 0 7px 0 rgba(50,50,50,.45);
+}
+
+#sidebar > #header {
+    border-radius: 2px 2px 0 0;
+
+}
+
+
+#sidebar > #header > h1 {
+    min-height: 40px;
+    padding: 3px 3px 2px;
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: 500;
+    color: #FFF;
+    word-wrap: break-word;
+    font-weight: 400;
+}
+
+#sidebar > #header > h1 > span {
+    display: inline-block;
+    padding: 12px 8px;
+    text-overflow: ellipsis;
+    max-width: 112px;
+}
+
+
+
+#sidebar > #sidebar_nav {
+    padding-bottom: 8px;
+    border-top: 1px solid #282828;
+    border-radius: 0 0 2px 2px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#sidebar > #sidebar_nav > ul > li {
+    transition: background-color .8s;
+    -moz-transition: background-color .8s;
+    -webkit-transition: background-color .8s;
+}
+
+#sidebar > #sidebar_nav ul > li.selected {
+    background-color: #292929;
+    color: #FFF;
+}
+
+#sidebar > #sidebar_nav ul > li > a {
+    display: block;
+    height: 25px;
+    padding: 0 10px;
+    border-top: 1px solid #3c3c3c;
+    border-bottom: 1px solid #282828;
+    line-height: 25px;
+}
+
+#sidebar > #sidebar_nav > ul > .selected > a::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 26px;
+    top: 0;
+    right: 0;
+    background: #018CDD;
+}
+
+
+#content {
+    margin-left: 300px;
+}
+
+
+#artist_cover {
+    display: block;
+    margin: 20px;
+}
+
+#artist_cover.artist_visuel {
+
+}
+
+#artist_cover.artist_head_info {
+    width: auto;
+    min-height: 250px;
+}
+
+h1.artist_name {
+    font-size: 26px;
+    font-weight: bold;
+    color: #666; 
+}
+

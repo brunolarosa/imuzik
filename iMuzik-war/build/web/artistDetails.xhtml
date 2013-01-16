@@ -1,0 +1,46 @@
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml"
+                template="./templates/main_template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <div id="artist_cover">
+            <div class="artist_visuel"></div>
+            <div class="artist_head_info">
+                <h1 class="artist_name">#{artistMBean.currentArtist.name}</h1>
+                <div class="artist_biography_resume"></div>
+            </div>
+            <div id="artist_music">
+                <div class="albums">
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="Discographie"/></h1>
+                            <h:dataTable value="#{artistMBean.currentArtist.albums}" var="album">
+                                <h:column>
+                                    <h:outputText value="#{album.title}"/>
+                                    <f:view>
+                                        <h:form>
+
+                                            <p:dataTable 
+                                                value="#{album.songs}"
+                                                var="item"
+                                                >
+                                                <p:column>
+                                                    <h:outputText value="#{item.title}"/>
+                                                </p:column>
+
+                                            </p:dataTable>
+                                        </h:form>
+                                    </f:view>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>
