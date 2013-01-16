@@ -4,11 +4,11 @@
  */
 package utils;
 
+import de.umass.lastfm.Track;
 import entities.Album;
 import entities.Artist;
 import entities.Category;
 import entities.Song;
-import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.view.facelets.TagException;
@@ -31,6 +31,7 @@ public class ID3Util {
     private static ArtistManager artistManager = lookupArtistManager();
     private static AlbumManager albumManager = lookupAlbumManager();
     private static CategoryManager categoryManager = lookupCategoryManager();
+    private static String lastFMKey = "564ddd75dbc03f61d54eec39d95b4b97";
 
     public static void readID3Tag(MP3File mp3File, Song song) {
 
@@ -41,37 +42,59 @@ public class ID3Util {
 
                 ID3v1 id3v1 = mp3File.getID3v1Tag();
 
-                if (null != id3v1) {
+                    Track track = Track.getInfo(id3v1.getArtist(), id3v1.getTitle(), lastFMKey);
 
                     song.setTitle(id3v1.getTitle());
 
-                    String artists = id3v1.getArtist();
 
-                    if (artists.equals("")) {
-                        artists = "Inconnu";
+                    /*
+                     * ARTISTS
+                     */
+                    String artistName = track.getArtist();
+
+                    if (artistName.trim().equals("")) {
+                        artistName = "Inconnu";
                     }
 
-                    String[] artistsList = artists.split(", ");
 
 
-                    Artist artist = artistManager.getByName(artistsList[0].trim());
+                    Artist artist = artistManager.getByName(artistName);
 
                     if (null == artist) {
-                        artist = new Artist(artistsList[0].trim());
+                        artist = new Artist(artistName);
+                        LastFMUtil.readArtist(artist);
                     }
                     song.setArtist(artist);
+                    
+                    
+                    /* ALBUM */
+                    String albumTitle = track.getAlbum();
+                    
+                    
+                    if(null == albumTitle) {
+                        
+                        if (id3v1.getAlbum().trim().equals("")) {
+                            albumTitle = "Inconnu";
+                        } else {
+                            albumTitle = id3v1.getAlbum().trim();
+                        }
+                    }
+                    
 
-                    String albumTitle = id3v1.getAlbum();
                     Album album = albumManager.getAlbum(albumTitle, artist);
 
                     if (null == album) {
                         album = new Album(albumTitle, artist);
+                        if(null != track.getAlbum()){
+                            LastFMUtil.readAlbum(album);
+                        }
+                        artist.getAlbums().add(album);
                     }
-
                     album.getSongs().add(song);
 
+
                     song.setAlbum(album);
-                    artist.getAlbums().add(album);
+
 
                     String categoryName = id3v1.getSongGenre();
 
@@ -95,11 +118,8 @@ public class ID3Util {
 
                 }
 
-            }
         }
     }
-
-    
 
     private static ArtistManager lookupArtistManager() {
         try {

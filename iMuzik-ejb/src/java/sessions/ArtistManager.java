@@ -24,40 +24,40 @@ import utils.ID3Util;
 @Stateless
 @LocalBean
 public class ArtistManager {
-    
+
     @PersistenceContext(unitName = "iMuzik-ejbPU")
     private EntityManager em;
 
-    
     public void createArtist(Artist artist) {
         em.persist(artist);
     }
-    
+
     public void persist(Object object) {
         em.persist(object);
     }
 
     public List<Artist> getAllArtists() {
-        
+
         Query query = em.createNamedQuery("Artist.findAll");
         return query.getResultList();
     }
-    
+
     public Artist getByName(String name) {
-        Query query = em.createNamedQuery("Artist.findByName");
-        query.setParameter("name", name);
-        List<Artist> artists = query.getResultList();
-        
-        if(artists.size() == 1) {
-            return artists.get(0);
-        } else {
-            return null;
+
+        System.out.println("------------"+name);
+        if (null != name) {
+            Query query = em.createNamedQuery("Artist.findByName");
+            query.setParameter("name", name);
+            List<Artist> artists = query.getResultList();
+
+            if (artists.size() == 1) {
+                return artists.get(0);
+            }
         }
+        return null;
     }
-    
+
     public void update(Artist artist) {
         em.merge(artist);
     }
-    
-    
 }

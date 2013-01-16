@@ -27,6 +27,11 @@ public class Artist implements Serializable {
     @Column(nullable=false)
     private String name;
     
+    
+    private String bio;
+    private String imageURL;
+    
+    
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="artist")
     private List<Album> albums;
 
@@ -53,6 +58,22 @@ public class Artist implements Serializable {
 
     public void setAlbums(List<Album> albums) {
         this.albums = albums;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
     
     

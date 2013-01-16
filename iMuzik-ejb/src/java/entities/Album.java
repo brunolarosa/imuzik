@@ -6,6 +6,7 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 
@@ -27,6 +28,10 @@ public class Album implements Serializable {
     
     @Column(nullable=false)
     private String title;
+    private String imageURL;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date releaseDate;
     
     @ManyToOne
     private Artist artist;
@@ -55,6 +60,24 @@ public class Album implements Serializable {
     public String getTitle() {
         return title;
     }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public Date getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(Date releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    
     
     
     
