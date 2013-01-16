@@ -4,12 +4,23 @@
  */
 package servlets;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import sessions.ArtistManager;
+import sessions.SongManager;
+import utils.ID3Util;
 
 /**
  *
@@ -27,32 +38,52 @@ public class musicServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-    
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        response.setContentType("audio/mpeg");
+        ServletOutputStream stream = null;
+        BufferedInputStream buffer = null;
         
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        String mp3ID = request.getParameter("m");
         
         try {
-            /*
-             * TODO output your page here. You may use following sample code.
-             */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet musicServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet musicServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+
+            Context context = new InitialContext();
+            SongManager songManager = (SongManager)context.lookup("java:global/iMuzik/iMuzik-ejb/SongManager");
+            
+            File mp3 = new File(songManager.getSong(Integer.valueOf(mp3ID)).getUrl());
+        
+            
+            stream = response.getOutputStream();
+
+
+            response.setContentLength((int) mp3.length());
+
+            FileInputStream input = new FileInputStream(mp3);
+            buffer = new BufferedInputStream(input);
+            int readBytes = 0;
+
+            //read from the file; write to the ServletOutputStream
+            while ((readBytes = buffer.read()) != -1) {
+                stream.write(readBytes);
+            }
+
+
+        } catch (Exception ioe) {
+            
+            throw new ServletException(ioe.getMessage());
+            
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+            if (buffer != null) {
+                buffer.close();
+            }
         }
-        
-        
+
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

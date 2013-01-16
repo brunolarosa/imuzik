@@ -30,7 +30,7 @@
                                                 var="item"
                                                 >
                                                 <p:column>
-                                                    <h:outputText value="#{item.title}"/>
+                                                    <h:commandLink value="#{item.title}" onclick="document.getElementById('sourceplayer').setAttribute('src', '../musicServlet?m=#{item.id}');document.getElementById('player').load();document.getElementById('player').play()" />
                                                 </p:column>
 
                                             </p:dataTable>
@@ -41,6 +41,21 @@
                         </h:form>
                     </f:view>
                 </div>
+
+                <script src="./../resources/js/audiojs/audio.min.js"></script>
+                <script>
+                    audiojs.events.ready(function() {
+                        var as = audiojs.createAll();
+                    });
+                </script>
+
+                <audio id="player" preload="false">
+                    <source id="sourceplayer" src="../musicServlet?m=1" />
+                </audio>
+
+
+
+
             </div>
         </div>
     </ui:define>

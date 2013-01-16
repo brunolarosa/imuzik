@@ -16,7 +16,6 @@ import javax.persistence.PersistenceContext;
 import org.farng.mp3.MP3File;
 import org.farng.mp3.TagException;
 import org.farng.mp3.id3.AbstractID3v2;
-import org.farng.mp3.id3.ID3v1;
 import utils.ID3Util;
 
 /**
@@ -41,6 +40,10 @@ public class SongManager {
         em.persist(object);
     }
     
+    
+    public Song getSong(int id) {
+        return em.find(Song.class, id);
+    }
     
     public void createSongWithFile(File file) {
         
