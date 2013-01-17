@@ -12,39 +12,49 @@
 
     <h:body>
 
-        <div id="wrappper">
+        <div id="container">
 
             <!-- START Siderbar -->
-            <div id="sidebar">
+            <section id="sidebar">
 
-                <div id="header">
-                    <h1><span>Home</span></h1>
-                </div>
+                <header>
+                    <ui:insert name="sidebar_header">
+                        <h1><span>Home</span></h1>
+                    </ui:insert>
 
-                <div id="sidebar_nav">
-                    <h:form>
-                        <ul>
-                        <li class="selected">
-                            <h:commandLink value="Artistes" action="artistsList?faces-redirect=true"/>
-                        </li>
-                        <li>
-                            <h:commandLink value="Albums" action="#"/>
-                        </li>
-                        <li>
-                            <h:commandLink value="Categories" action="#"/>
-                        </li>
-                        </ul>
-                    </h:form>
-                    
-                </div>        
-            </div>
+                </header>
+
+                <nav id="sidebar_nav">
+                    <ul>
+                        <li><a href="">Song</a></li>
+                    </ul>
+                </nav>        
+            </section>
             <!-- END Siderbar -->
 
-            <div id="content">
+            <div id="wrap">
                 <ui:insert name="content">Content</ui:insert>
+
+
+
             </div>
 
         </div>
+        <footer id="footer">
+            <div id="global">
+                <audio id="player" preload="false">
+                    <source id="sourceplayer" src="../musicServlet?m=1" />
+                </audio>
+            </div>
+        </footer>
+
+
+        <script src="./../resources/js/audiojs/audio.min.js"></script>
+        <script>
+            audiojs.events.ready(function() {
+                var as = audiojs.createAll();
+            });
+        </script>
 
     </h:body>
 
