@@ -48,7 +48,8 @@
                                         <c:forEach var="song" items="#{album.songs}">
                                             <li draggable="true" class="">
                                                 <div class="left">
-                                                    <h:commandLink value="#{song.number}" onclick="document.getElementById('sourceplayer').setAttribute('src', '../musicServlet/?m=#{song.id}'); document.getElementById('player').load(); document.getElementById('player').play();"/>
+                                                    
+                                                    <a href="#" onclick="javascript:changeMusic(#{song.id})" >#{song.number}</a>
                                                     <button class="playBtn play_25 song">lol</button>
 
                                                 </div>
@@ -105,13 +106,6 @@
                             </div>
                         </li>
                     </c:forEach>
-
-
-
-                    <li class="">
-
-
-                    </li>
                 </ul>
             </div>
         </div>

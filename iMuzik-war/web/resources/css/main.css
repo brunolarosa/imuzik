@@ -9179,3 +9179,13 @@ to {
 margin-bottom: 15px;
 color: #444;
 }
+
+#wrap > aside > section {
+padding: 30px 40px 0 30px;
+}
+
+#wrap > aside > section > p {
+font-size: 20px;
+line-height: 27px;
+font-weight: 200;
+}

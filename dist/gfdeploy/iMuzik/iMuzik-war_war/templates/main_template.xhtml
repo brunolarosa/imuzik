@@ -49,21 +49,26 @@
             </div>
 
         </div>
+        
+
         <footer id="footer">
             <div id="global">
-                <audio id="player" preload="false">
-                    <source id="sourceplayer" src="../musicServlet?m=1" />
+                <audio id="player" preload="false" controls="true">
+                    <source id="sourceplayer" src="/Users/brunolarosa/Music/03 Suzy (Feat. Mod Martin).mp3" />
                 </audio>
             </div>
         </footer>
-
-
-        <script src="./../resources/js/audiojs/audio.min.js"></script>
+        
         <script>
-            audiojs.events.ready(function() {
-                var as = audiojs.createAll();
-            });
-        </script>
+        
+        function changeMusic(id) { 
+            document.getElementById('sourceplayer').setAttribute('src','../musicServlet?m='+id);
+            document.getElementById('player').load();
+            document.getElementById('player').play();
+        }
+    </script>
+        
+        
     </h:body>
 
 </html>
