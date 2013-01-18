@@ -18,14 +18,36 @@ public class LastFMUtil {
 
     public static void readArtist(entities.Artist artist) {
         Artist artistFM = Artist.getInfo(artist.getName(), lastFMKey);
-        //artist.setBio(artistFM.getWikiSummary().replace("\"", "\\\""));
+        artist.setBio(artistFM.getWikiSummary().replace("\"", "\\\""));
         artist.setImageURL(artistFM.getImageURL(ImageSize.LARGE));
     }
 
     public static void readAlbum(entities.Album album) {
+        System.out.println("artist :"+album.getArtist().getName()+" album :"+album.getTitle());
         Album albumFM = Album.getInfo(album.getArtist().getName(), album.getTitle(), lastFMKey);
         if (null != albumFM) {
-            album.setImageURL(albumFM.getImageURL(ImageSize.LARGE));
+            String urlImage = null;
+            ImageSize[] imageSizes = {
+                ImageSize.EXTRALARGE,
+                ImageSize.HUGE,
+                ImageSize.LARGE,
+                ImageSize.LARGESQUARE,
+                ImageSize.MEDIUM,
+                ImageSize.MEGA,
+                ImageSize.ORIGINAL,
+                ImageSize.SMALL };
+            
+            String url = null;
+            
+            int i = 0;
+            while(i < imageSizes.length && url == null) {
+                url = albumFM.getImageURL(imageSizes[i]);
+                System.out.println("url : "+url);
+                i++;
+            }
+            
+            
+            album.setImageURL((null == url) ? "test" : url);
             album.setReleaseDate(albumFM.getReleaseDate());
         }
     }

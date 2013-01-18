@@ -64,7 +64,9 @@ public class ID3Util {
                         artist = new Artist(artistName);
                         LastFMUtil.readArtist(artist);
                     }
+                    
                     song.setArtist(artist);
+                    
                     
                     
                     /* ALBUM */
@@ -77,6 +79,7 @@ public class ID3Util {
                             albumTitle = "Inconnu";
                         } else {
                             albumTitle = id3v1.getAlbum().trim();
+                            
                         }
                     }
                     
@@ -84,9 +87,13 @@ public class ID3Util {
                     Album album = albumManager.getAlbum(albumTitle, artist);
 
                     if (null == album) {
+                        
                         album = new Album(albumTitle, artist);
+                        
+                        System.out.println(track.toString()+ "----------"+track.getAlbum());
                         if(null != track.getAlbum()){
                             LastFMUtil.readAlbum(album);
+                            
                         }
                         artist.getAlbums().add(album);
                     }

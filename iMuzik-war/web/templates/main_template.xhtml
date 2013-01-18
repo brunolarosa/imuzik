@@ -7,6 +7,8 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../resources/css/main.css" rel="stylesheet" type="text/css" />
+        
+       
         <title>iMuzik</title>
     </h:head>
 
@@ -24,17 +26,24 @@
 
                 </header>
 
+
                 <nav id="sidebar_nav">
-                    <ul>
-                        <li><a href="">Song</a></li>
-                    </ul>
-                </nav>        
+                    <h:form>
+                        <ul>
+                            <li><h:commandLink value="Song" action="#{artistMBean.showArtistDetails(artist)}"/></li>
+                        </ul>
+                    </h:form>
+
+                </nav> 
+
+
             </section>
             <!-- END Siderbar -->
 
-            <div id="wrap">
+            <div id="wrap" class="container">
+                
                 <ui:insert name="content">Content</ui:insert>
-
+               
 
 
             </div>
@@ -55,7 +64,6 @@
                 var as = audiojs.createAll();
             });
         </script>
-
     </h:body>
 
 </html>

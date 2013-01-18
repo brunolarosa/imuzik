@@ -27,13 +27,20 @@ public class Artist implements Serializable {
     @Column(nullable=false)
     private String name;
     
-    
+    //@Column(columnDefinition="LONGTEXT")
+    @Lob
+    @Column(length=10000)
     private String bio;
+    
     private String imageURL;
     
     
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="artist")
     private List<Album> albums;
+    
+    @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY, mappedBy="artist")
+    private List<Song> songs;
+
 
     /* GETTERS AND SETTERS */
     public int getId() {
@@ -60,6 +67,19 @@ public class Artist implements Serializable {
         this.albums = albums;
     }
 
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+    
+    
+
+
+    
+    
     public String getBio() {
         return bio;
     }

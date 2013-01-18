@@ -11,37 +11,120 @@
             <div class="mediaSquare">
                 <img src="#{artistMBean.currentArtist.imageURL}" />
             </div>
-            
+
         </div>
         <h1><span>#{artistMBean.currentArtist.name}</span></h1>
     </ui:define>
-    
+
     <ui:define name="content">
         <div id="artistAlbums">
-            <ul class="slats">
-                <c:forEach var="album" items="#{artistMBean.currentArtist.albums}">
-                    <li>
-                    <div class="albumContainer">
-                        <img src="#{album.imageURL}" />
-                    </div>
-                    <div>
-                        <h3 class="albumTitle"></h3>
-                    </div>
-                </li>
-                </c:forEach>
-                
-            </ul>
+            <div id="artistalbums">
+
+
+
+                <ul class="slats infinite large lazyLoad">
+                    <c:forEach var="album" items="#{artistMBean.currentArtist.albums}">
+                        <li>
+                            <div class="albumContainer">
+
+                                <div class="album mediaSquare large" >
+                                    <a href="#" >
+                                        <img src="#{album.imageURL}" />
+
+                                    </a>
+
+                                    <!-- Album Meta Info - Regular -->
+
+
+                                </div>
+
+                            </div>
+                            <div>
+                                <h3 class="albumTitle">#{album.title}</h3>
+
+                                <h:form>
+                                    <ul class="table mediaItems">
+
+                                        <c:forEach var="song" items="#{album.songs}">
+                                            <li draggable="true" class="">
+                                                <div class="left">
+                                                    <h:commandLink value="#{song.number}" onclick="document.getElementById('sourceplayer').setAttribute('src', '../musicServlet/?m=#{song.id}'); document.getElementById('player').load(); document.getElementById('player').play();"/>
+                                                    <button class="playBtn play_25 song">lol</button>
+
+                                                </div>
+
+
+
+
+                                                <div class="flex">
+                                                    <div class="title"> <!-- MANDATORY COLUMN -->
+                                                        <span>#{song.title}</span>
+
+
+                                                    </div>
+
+
+                                                    <div class="video">
+
+                                                    </div>
+
+
+
+                                                    <div class="artist">
+                                                        <h:commandLink value="#{song.artist.name}" action="#{artistMBean.showArtistDetails(song.artist)}"/>
+                                                    </div>
+
+
+
+                                                    <div class="album">
+
+                                                    </div>
+
+
+
+                                                    <div class="duration">Durée</div>
+
+
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                            </li>
+                                        </c:forEach>
+
+
+                                    </ul>
+                                </h:form>
+
+                            </div>
+                        </li>
+                    </c:forEach>
+
+
+
+                    <li class="">
+
+
+                    </li>
+                </ul>
+            </div>
         </div>
-        
-        
+
+
         <aside>
             <section>
                 <p>
-                    Ceci est un test !
+                    #{artistMBean.currentArtist.bio}
                 </p>
             </section>
         </aside>
-        
+
     </ui:define>
 
 </ui:composition>
