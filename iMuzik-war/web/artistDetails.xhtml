@@ -72,7 +72,7 @@
 
 
                                                     <div class="artist">
-                                                        <h:commandLink value="#{song.artist.name}" action="#{artistMBean.showArtistDetails(song.artist)}"/>
+                                                        <h:commandLink value="#{song.artist.name}" action="#{artistMBean.showArtistDetails(song.artist)}" update=":content" />
                                                     </div>
 
 
