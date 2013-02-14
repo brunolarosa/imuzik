@@ -39,6 +39,7 @@
                                 </div>
 
                             </div>
+         
                             <div>
                                 <h3 class="albumTitle">#{album.title}</h3>
 
@@ -48,13 +49,15 @@
                                         <c:forEach var="song" items="#{album.songs}">
                                             <li draggable="true" class="">
                                                 <div class="left">
-                                                    
-                                                    <a href="#" onclick="javascript:changeMusic(#{song.id})" >#{song.number}</a>
+
+                                                    <a href="#" onclick="javascript:parent.addMusic(#{song.id})" >#{song.number}</a>
                                                     <button class="playBtn play_25 song">lol</button>
+                                                    <c:if test="#{(userMBean.userLogged != null)}">
+                                                    <a href="#" onclick="#{userMBean.addSongPlaylist(song)}" >A</a>
+                                                    <button class="playBtn play_25 song">lol</button>
+                                                    </c:if>
 
                                                 </div>
-
-
 
 
                                                 <div class="flex">

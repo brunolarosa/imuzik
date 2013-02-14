@@ -28,7 +28,8 @@ public class CategoryManager {
         em.persist(object);
     }
     
-    /* BUSINESS METHODS */
+
+
 
     public List<Category> getAllCategories() {
         Query query = em.createNamedQuery("Category.findAll");

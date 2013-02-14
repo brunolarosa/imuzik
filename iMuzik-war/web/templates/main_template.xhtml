@@ -7,8 +7,8 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../resources/css/main.css" rel="stylesheet" type="text/css" />
-        
-       
+
+
         <title>iMuzik</title>
     </h:head>
 
@@ -30,7 +30,11 @@
                 <nav id="sidebar_nav">
                     <h:form>
                         <ul>
+                            <li><h:commandLink value="Accueil" action="artistsList.xhtml"/></li>
+                            <li><h:commandLink value="Playlist" action="playlist.xhtml"/></li>
+                            <li><h:commandLink value="Mes infos" action="myInfos.xhtml"/></li>
                             <li><h:commandLink value="Song" action="#{artistMBean.showArtistDetails(artist)}"/></li>
+                            <li><h:commandLink value="Add" action="javascript:parent.addMusic('1')"/></li>
                         </ul>
                     </h:form>
 
@@ -41,34 +45,17 @@
             <!-- END Siderbar -->
 
             <div id="wrap" class="container">
-                
+
                 <ui:insert name="content">Content</ui:insert>
-               
+
 
 
             </div>
 
         </div>
-        
 
-        <footer id="footer">
-            <div id="global">
-                <audio id="player" preload="false" controls="true">
-                    <source id="sourceplayer" src="/Users/brunolarosa/Music/03 Suzy (Feat. Mod Martin).mp3" />
-                </audio>
-            </div>
-        </footer>
-        
-        <script>
-        
-        function changeMusic(id) { 
-            document.getElementById('sourceplayer').setAttribute('src','../musicServlet?m='+id);
-            document.getElementById('player').load();
-            document.getElementById('player').play();
-        }
-    </script>
-        
-        
+
+
     </h:body>
 
 </html>

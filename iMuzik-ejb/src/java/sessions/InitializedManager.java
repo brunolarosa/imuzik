@@ -36,7 +36,7 @@ public class InitializedManager {
     public void init() {
 
 
-        File root = new File("/Users/brunolarosa/Music/");
+        File root = new File("/Users/dominiquec/Desktop/MusicTest");
         String[] extensions = {"mp3"};
         Collection<File> files = FileUtils.listFiles(root, extensions, true);
 
