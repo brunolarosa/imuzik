@@ -53,10 +53,12 @@
                                                     <a href="#" onclick="javascript:parent.addMusic(#{song.id})" >#{song.number}</a>
                                                     <button class="playBtn play_25 song">lol</button>
                                                     <c:if test="#{(userMBean.userLogged != null)}">
-                                                    <a href="#" onclick="#{userMBean.addSongPlaylist(song)}" >A</a>
+                                                        <c:if test="#{(userMBean.playlistSelectedID != -1)}">
+
+                                                        <a href="#" onclick="#{userMBean.addSongPlaylist(song)}" >A</a>
                                                     <button class="playBtn play_25 song">lol</button>
                                                     </c:if>
-
+                                                    </c:if>
                                                 </div>
 
 

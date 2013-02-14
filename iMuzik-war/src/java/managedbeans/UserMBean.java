@@ -35,7 +35,7 @@ public class UserMBean implements Serializable {
     private String firstName;
     private String lastName;
     private UserEntity userLogged;
-    private int playlistSelectedID;
+    private int playlistSelectedID = -1;
     private String namePlaylist;
 
     public int getPlaylistSelectedID() {
