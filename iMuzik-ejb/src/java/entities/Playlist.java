@@ -6,7 +6,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.persistence.*;
 
@@ -28,8 +27,7 @@ public class Playlist implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
- 
-    private HashMap<Song, Integer> playlist;
+
     
     @OneToMany(cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
     private List<PlaylistItem> playlistItems;
@@ -43,23 +41,15 @@ public class Playlist implements Serializable {
 
     public Playlist(String name) {
         this.name = name;
-        this.playlist = new HashMap<Song, Integer>();
         this.playlistItems = new ArrayList<PlaylistItem>();
     }
 
     public Playlist(UserEntity user, String name) {
         this.user = user;
         this.name = name;
-        this.playlist = new HashMap<Song, Integer>();
+        this.playlistItems = new ArrayList<PlaylistItem>();
     }
 
-    public HashMap<Song, Integer> getPlaylist() {
-        return playlist;
-    }
-
-    public void setPlaylist(HashMap<Song, Integer> playlist) {
-        this.playlist = playlist;
-    }
 
     public String getName() {
         return name;
@@ -77,6 +67,10 @@ public class Playlist implements Serializable {
         this.user = user;
     }
 
+    public void addPlaylistItem(PlaylistItem playlistItem){
+        this.getPlaylistItems().add(playlistItem);   
+    }
+    
     public List<PlaylistItem> getPlaylistItems() {
         return playlistItems;
     }
@@ -109,5 +103,7 @@ public class Playlist implements Serializable {
     public String toString() {
         return "entities.Playlist[ id=" + id + " ]";
     }
+    
+    
     
 }

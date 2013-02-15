@@ -39,7 +39,7 @@
                                 </div>
 
                             </div>
-         
+
                             <div>
                                 <h3 class="albumTitle">#{album.title}</h3>
 
@@ -53,17 +53,15 @@
                                                     <a href="#" onclick="javascript:parent.addMusic(#{song.id})" >#{song.number}</a>
                                                     <button class="playBtn play_25 song">lol</button>
                                                     <c:if test="#{(userMBean.userLogged != null)}">
-                                                        <c:if test="#{(userMBean.playlistSelectedID != -1)}">
-
-                                                        <a href="#" onclick="#{userMBean.addSongPlaylist(song)}" >A</a>
-                                                    <button class="playBtn play_25 song">lol</button>
-                                                    </c:if>
+                                                            <h:commandLink value="A" action="#{userMBean.addSongPlaylist(song)}"/>
+                                                            <button class="playBtn play_25 song">lol</button>
                                                     </c:if>
                                                 </div>
 
 
                                                 <div class="flex">
                                                     <div class="title"> <!-- MANDATORY COLUMN -->
+
                                                         <span>#{song.title}</span>
 
 

@@ -19,7 +19,7 @@ import javax.persistence.PersistenceContext;
 @Stateless
 @LocalBean
 public class PlaylistManager {
-    
+
     @PersistenceContext(unitName = "iMuzik-ejbPU")
     private EntityManager em;
 
@@ -27,26 +27,25 @@ public class PlaylistManager {
         em.persist(object);
     }
 
-   public void createPlaylist(String name) {
+    public void createPlaylist(String name) {
         Playlist playlist = new Playlist(name);
         persist(playlist);
     }
-   
+
     public Playlist getPlaylist(int id) {
         return em.find(Playlist.class, id);
     }
-    
-   
-    public void addSongPlaylist(int playlistID, Song song) {
-        Playlist playlist = getPlaylist(playlistID);
-          playlist.getPlaylistItems().add(new PlaylistItem(song, playlist.getPlaylistItems().size()));
-          em.merge(playlist);
-    }
 
+    /*
+     * public void addSongPlaylist(int playlistID, Song song) { Playlist
+     * playlist = getPlaylist(playlistID); PlaylistItem playlistItem = new
+     * PlaylistItem(song, playlist.getPlaylistItems().size());
+     * playlist.getPlaylistItems().add(playlistItem); em.merge(playlist); }
+     */
+    
     public void delSongPlaylist(int playlistID, PlaylistItem playlistItem) {
         Playlist playlist = getPlaylist(playlistID);
-          playlist.getPlaylistItems().remove(playlistItem);
-          em.merge(playlist);
+        playlist.getPlaylistItems().remove(playlistItem);
+        em.merge(playlist);
     }
-    
 }

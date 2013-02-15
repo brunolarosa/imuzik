@@ -32,7 +32,7 @@
 
                                                     <a href="#" onclick="javascript:parent.addMusic(#{song.id})" >#{playlistItem.song.number}</a>
                                                     <button class="playBtn play_25 song">lol</button>
-                                                    <a href="#" onclick="#{userMBean.delSongPlaylist(playlistItem)}" >D</a>
+                                                    <h:commandLink value="D" action="#{userMBean.delSongPlaylist(playlist.id , playlistItem)}"/>
                                                     <button class="playBtn play_25 song">lol</button>
 
                                                 </div>

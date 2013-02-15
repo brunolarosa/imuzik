@@ -67,7 +67,7 @@ public class PlaylistItem implements Serializable {
         }
         return true;
     }
-
+        
     @Override
     public String toString() {
         return "entities.PlaylistItem[ id=" + id + " ]";
