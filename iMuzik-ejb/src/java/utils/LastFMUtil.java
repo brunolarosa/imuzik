@@ -7,6 +7,7 @@ package utils;
 import de.umass.lastfm.Album;
 import de.umass.lastfm.Artist;
 import de.umass.lastfm.ImageSize;
+import org.jsoup.Jsoup;
 
 /**
  *
@@ -18,12 +19,19 @@ public class LastFMUtil {
 
     public static void readArtist(entities.Artist artist) {
         Artist artistFM = Artist.getInfo(artist.getName(), lastFMKey);
-        artist.setBio(artistFM.getWikiSummary().replace("\"", "\\\""));
+
+        //Suppression des tags HTML dans la bio
+        String bio = artistFM.getWikiSummary().replaceAll("\\<.*?\\>", "");
+        
+        //Suppression de la derniere ligne Last.fm de la bio
+        bio = bio.split("Read more about Black Eyed Peas on Last.fm.")[0];
+        artist.setBio(bio);
+
         artist.setImageURL(artistFM.getImageURL(ImageSize.LARGE));
     }
 
     public static void readAlbum(entities.Album album) {
-        System.out.println("artist :"+album.getArtist().getName()+" album :"+album.getTitle());
+        System.out.println("artist :" + album.getArtist().getName() + " album :" + album.getTitle());
         Album albumFM = Album.getInfo(album.getArtist().getName(), album.getTitle(), lastFMKey);
         if (null != albumFM) {
             String urlImage = null;
@@ -35,18 +43,18 @@ public class LastFMUtil {
                 ImageSize.MEDIUM,
                 ImageSize.MEGA,
                 ImageSize.ORIGINAL,
-                ImageSize.SMALL };
-            
+                ImageSize.SMALL};
+
             String url = null;
-            
+
             int i = 0;
-            while(i < imageSizes.length && url == null) {
+            while (i < imageSizes.length && url == null) {
                 url = albumFM.getImageURL(imageSizes[i]);
-                System.out.println("url : "+url);
+                System.out.println("url : " + url);
                 i++;
             }
-            
-            
+
+
             album.setImageURL((null == url) ? "test" : url);
             album.setReleaseDate(albumFM.getReleaseDate());
         }

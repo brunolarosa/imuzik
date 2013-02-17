@@ -22,7 +22,7 @@
 
                 <header>
                     <ui:insert name="sidebar_header">
-                        <h1><span><a href="artistsList.xhtml">Home</a></span></h1>
+                        <h1><span>Home</span></h1>
                     </ui:insert>
 
                 </header>
@@ -31,7 +31,7 @@
                 <nav id="sidebar_nav">
                     <h:form>
                         <ul>
-                            <li><h:commandLink value="Enregistrement" action="#{userMBean.signup()}"/></li>
+                            <li><h:commandLink value="Accueil" action="artistsList.xhtml"/></li>
                             <li><h:commandLink value="Playlist" action="playlist.xhtml"/></li>
                             <li><h:commandLink value="Mes infos" action="myInfos.xhtml"/></li>
                             <c:if test="#{userMBean.userIsLogged()}">
@@ -39,7 +39,8 @@
                                     <li><h:commandLink value="Admin" action="admin.xhtml"/></li>
                                 </c:if>
                             </c:if>
-                            <li><h:commandLink value="Artistes" action="artistsList.xhtml"/></li>
+                            <li><h:commandLink value="Song" action="#{artistMBean.showArtistDetails(artist)}"/></li>
+                            <li><h:commandLink value="Add" action="javascript:parent.addMusic('1')"/></li>
                         </ul>
                     </h:form>
 

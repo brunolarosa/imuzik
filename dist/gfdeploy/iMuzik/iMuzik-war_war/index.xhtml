@@ -26,7 +26,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="brand" href="#">IMuzik</a>
+                   <h:form class="brand" ><h:commandLink value="IMuzik" action="#{userMBean.signup()}"  target="iframe"/></h:form>
                     <div class="nav-collapse collapse">
                             <f:view>
                                 <c:choose>
@@ -48,12 +48,7 @@
                                 </c:choose>
                             </f:view>
 
-                        <h:form>
-                        <ul class="nav">
-                            <li class="active"><h:commandLink value="Accueil" action="#{userMBean.signup()}"  target="iframe"/></li>
-                            <li><h:commandLink value="Enregistrement" action="#{userMBean.signup()}"   target="iframe"/></li>
-                        </ul>
-                            </h:form>
+                  
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
