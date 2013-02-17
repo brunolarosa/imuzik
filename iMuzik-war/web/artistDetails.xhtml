@@ -50,8 +50,8 @@
                                             <li draggable="true" class="">
                                                 <div class="left">
 
-                                                    <a href="#" onclick="javascript:parent.addMusic(#{song.id})" >#{song.number}</a>
-                                                    <button class="playBtn play_25 song">lol</button>
+                                                    <a href="#" onclick="javascript:parent.changeMusic(#{song.id})" >#{song.number}<i class="icon-play"></i></a>
+                                                    <button class="playBtn play_25 song"><i class="icon-play"></i></button>
                                                     <c:if test="#{(userMBean.userLogged != null)}">
                                                             <h:commandLink value="A" action="#{userMBean.addSongPlaylist(song)}"/>
                                                             <button class="playBtn play_25 song">lol</button>
@@ -115,7 +115,7 @@
 
 
         <aside>
-            <section>
+            <section id="section">
                 <p>
                     #{artistMBean.currentArtist.bio}
                 </p>

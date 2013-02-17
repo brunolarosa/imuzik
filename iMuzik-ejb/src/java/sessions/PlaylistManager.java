@@ -48,4 +48,8 @@ public class PlaylistManager {
         playlist.getPlaylistItems().remove(playlistItem);
         em.merge(playlist);
     }
+
+    public void deletePlaylist(int playlistSelectedID) {
+        em.remove(getPlaylist(playlistSelectedID)); 
+    }
 }
